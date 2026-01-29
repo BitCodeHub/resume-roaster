@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Roaster 🔥 - Get Brutally Honest Feedback</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ff6b6b, #ffa500, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .upload-zone {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px dashed rgba(255, 107, 107, 0.3);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    .upload-zone:hover {
+      border-color: rgba(255, 107, 107, 0.6);
+      background: rgba(255, 107, 107, 0.05);
+    }
+
+    .upload-zone.dragover {
+      border-color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      transform: scale(1.02);
+    }
+
+    .upload-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .upload-text {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .upload-hint {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .file-selected {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .file-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .remove-file {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .intensity-selector {
+      margin-bottom: 30px;
+    }
+
+    .intensity-label {
+      display: block;
+      margin-bottom: 15px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .intensity-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .intensity-btn {
+      flex: 1;
+      padding: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .intensity-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .intensity-btn.active {
+      border-color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+    }
+
+    .intensity-btn .emoji {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .intensity-btn .label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .roast-btn {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .roast-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    }
+
+    .roast-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 107, 107, 0.2);
+      border-top-color: #ff6b6b;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: #888;
+      font-size: 1.1rem;
+    }
+
+    .loading-subtext {
+      color: #555;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .results {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .results.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .results-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .roast-content {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 30px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .roast-content h2, .roast-content strong {
+      color: #ff6b6b;
+    }
+
+    .roast-again-btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .roast-again-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .error {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      color: #ff6b6b;
+      display: none;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #ff6b6b;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .upload-zone { padding: 40px 20px; }
+      .intensity-options { flex-direction: column; }
+      .roast-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Resume Roaster 🔥</h1>
+      <p class="tagline">Get brutally honest feedback on your resume</p>
+      <p class="subtitle">Because your friends are too nice to tell you it sucks</p>
+    </header>
+
+    <main id="main">
+      <div id="upload-section">
+        <div class="upload-zone" id="dropZone">
+          <div class="upload-icon">📄</div>
+          <p class="upload-text">Drop your resume here</p>
+          <p class="upload-hint">or click to browse (PDF only, max 5MB)</p>
+          <input type="file" id="fileInput" class="file-input" accept=".pdf">
+        </div>
+
+        <div class="file-selected" id="fileSelected" style="display: none;">
+          <span class="file-name">
+            <span>📄</span>
+            <span id="fileName"></span>
+          </span>
+          <button class="remove-file" id="removeFile">✕</button>
+        </div>
+
+        <div class="intensity-selector">
+          <label class="intensity-label">Choose your roast intensity:</label>
+          <div class="intensity-options">
+            <button class="intensity-btn" data-intensity="mild">
+              <span class="emoji">😊</span>
+              <span class="label">Mild</span>
+            </button>
+            <button class="intensity-btn active" data-intensity="medium">
+              <span class="emoji">😈</span>
+              <span class="label">Medium</span>
+            </button>
+            <button class="intensity-btn" data-intensity="brutal">
+              <span class="emoji">💀</span>
+              <span class="label">Brutal</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="roast-btn" id="roastBtn" disabled>
+          <span>🔥</span>
+          <span>Roast My Resume</span>
+        </button>
+
+        <div class="error" id="error"></div>
+      </div>
+
+      <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Analyzing your resume...</p>
+        <p class="loading-subtext" id="loadingSubtext">Preparing the roast...</p>
+      </div>
+
+      <div class="results" id="results">
+        <div class="results-header">
+          <h2 class="results-title">🔥 Your Roast Is Ready</h2>
+        </div>
+        <div class="roast-content" id="roastContent"></div>
+        <button class="roast-again-btn" id="roastAgain">Roast Another Resume</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Built with 🔥 by <a href="https://lumen-dashboard.onrender.com">Luna Labs</a></p>
+      <p style="margin-top: 10px;">Your resume is processed securely and never stored.</p>
+    </footer>
+  </div>
+
+  <script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileSelected = document.getElementById('fileSelected');
+    const fileName = document.getElementById('fileName');
+    const removeFile = document.getElementById('removeFile');
+    const roastBtn = document.getElementById('roastBtn');
+    const uploadSection = document.getElementById('upload-section');
+    const loading = document.getElementById('loading');
+    const loadingSubtext = document.getElementById('loadingSubtext');
+    const results = document.getElementById('results');
+    const roastContent = document.getElementById('roastContent');
+    const roastAgain = document.getElementById('roastAgain');
+    const error = document.getElementById('error');
+
+    let selectedFile = null;
+    let selectedIntensity = 'medium';
+
+    const loadingMessages = [
+      "Reading between the lines...",
+      "Judging your font choices...",
+      "Counting buzzwords...",
+      "Questioning your life decisions...",
+      "Consulting the hiring gods...",
+      "Preparing constructive criticism...",
+      "Loading sarcasm module...",
+      "Finding the nice things to say..."
+    ];
+
+    // Drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type === 'application/pdf') {
+        selectFile(file);
+      } else {
+        showError('Please upload a PDF file');
+      }
+    });
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) selectFile(e.target.files[0]);
+    });
+
+    function selectFile(file) {
+      selectedFile = file;
+      fileName.textContent = file.name;
+      dropZone.style.display = 'none';
+      fileSelected.style.display = 'flex';
+      roastBtn.disabled = false;
+      hideError();
+    }
+
+    removeFile.addEventListener('click', () => {
+      selectedFile = null;
+      fileInput.value = '';
+      dropZone.style.display = 'block';
+      fileSelected.style.display = 'none';
+      roastBtn.disabled = true;
+    });
+
+    // Intensity selector
+    document.querySelectorAll('.intensity-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.intensity-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedIntensity = btn.dataset.intensity;
+      });
+    });
+
+    // Roast button
+    roastBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+
+      uploadSection.style.display = 'none';
+      loading.classList.add('show');
+
+      // Rotate loading messages
+      let msgIndex = 0;
+      const msgInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % loadingMessages.length;
+        loadingSubtext.textContent = loadingMessages[msgIndex];
+      }, 2000);
+
+      try {
+        const formData = new FormData();
+        formData.append('resume', selectedFile);
+        formData.append('intensity', selectedIntensity);
+
+        const response = await fetch('/api/roast', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+        clearInterval(msgInterval);
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        // Format the roast content with some basic markdown-like parsing
+        let content = data.roast;
+        content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        content = content.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+        content = content.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+        
+        roastContent.innerHTML = content;
+        loading.classList.remove('show');
+        results.classList.add('show');
+
+      } catch (err) {
+        clearInterval(msgInterval);
+        loading.classList.remove('show');
+        uploadSection.style.display = 'block';
+        showError(err.message || 'Something went wrong. Please try again.');
+      }
+    });
+
+    // Roast again
+    roastAgain.addEventListener('click', () => {
+      results.classList.remove('show');
+      uploadSection.style.display = 'block';
+      removeFile.click();
+    });
+
+    function showError(message) {
+      error.textContent = message;
+      error.classList.add('show');
+    }
+
+    function hideError() {
+      error.classList.remove('show');
+    }
+  </script>
+</body>
+</html>
