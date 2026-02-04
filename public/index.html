@@ -501,6 +501,94 @@
     input[type="file"] {
       display: none;
     }
+
+    /* Pricing Cards */
+    .pricing-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 40px rgba(255, 107, 90, 0.15);
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent-coral);
+      background: rgba(255, 107, 90, 0.05);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent-coral);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .credits {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .per-credit {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .save {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--accent-green);
+      color: white;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .features li {
+      padding: 8px 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .buy-btn {
+      width: 100%;
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
@@ -662,6 +750,80 @@ We'll analyze:
         <span>Start Over</span>
       </button>
     </div>
+
+    <!-- Pricing Section (shown when credits run out) -->
+    <div id="pricingSection" class="container hidden" style="margin: 60px auto;">
+      <div class="card" style="max-width: 900px;">
+        <h2 class="section-title">💎 Get More Credits</h2>
+        <p class="section-subtitle" style="margin-bottom: 40px;">Choose a package that works for you. No subscription required.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Starter</h3>
+              <div class="price">$5</div>
+              <div class="credits">3 credits</div>
+            </div>
+            <div class="pricing-body">
+              <div class="per-credit">$1.67 per roast</div>
+              <ul class="features">
+                <li>✓ 3 resume analyses</li>
+                <li>✓ Job matching</li>
+                <li>✓ ATS scoring</li>
+                <li>✓ Instant results</li>
+              </ul>
+              <button class="btn-primary buy-btn" data-package="starter" data-credits="3" data-price="5">
+                Buy Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Pro (Popular) -->
+          <div class="pricing-card popular">
+            <div class="popular-badge">POPULAR</div>
+            <div class="pricing-header">
+              <h3>Pro</h3>
+              <div class="price">$15</div>
+              <div class="credits">10 credits</div>
+            </div>
+            <div class="pricing-body">
+              <div class="per-credit">$1.50 per roast <span class="save">Save 10%</span></div>
+              <ul class="features">
+                <li>✓ 10 resume analyses</li>
+                <li>✓ Job matching</li>
+                <li>✓ ATS scoring</li>
+                <li>✓ Priority support</li>
+              </ul>
+              <button class="btn-primary buy-btn" data-package="pro" data-credits="10" data-price="15">
+                Buy Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Elite -->
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Elite</h3>
+              <div class="price">$29</div>
+              <div class="credits">25 credits</div>
+            </div>
+            <div class="pricing-body">
+              <div class="per-credit">$1.16 per roast <span class="save">Save 30%</span></div>
+              <ul class="features">
+                <li>✓ 25 resume analyses</li>
+                <li>✓ Job matching</li>
+                <li>✓ ATS scoring</li>
+                <li>✓ VIP support</li>
+              </ul>
+              <button class="btn-primary buy-btn" data-package="elite" data-credits="25" data-price="29">
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -712,6 +874,7 @@ We'll analyze:
     const resultsSection = document.getElementById('resultsSection');
     const jobMatchSection = document.getElementById('jobMatchSection');
     const startOverSection = document.getElementById('startOverSection');
+    const pricingSection = document.getElementById('pricingSection');
     
     const roastContent = document.getElementById('roastContent');
     const jobMatchContent = document.getElementById('jobMatchContent');
@@ -798,7 +961,9 @@ We'll analyze:
       if (!selectedFile) return;
 
       if (getCredits() === 0) {
-        showError('You need credits to analyze a resume. Get credits to continue!');
+        showError('You need credits to analyze a resume. Get credits below!');
+        pricingSection.classList.remove('hidden');
+        pricingSection.scrollIntoView({ behavior: 'smooth' });
         return;
       }
 
@@ -865,7 +1030,9 @@ We'll analyze:
       }
 
       if (getCredits() === 0) {
-        showError('You need credits to perform job matching analysis.');
+        showError('You need credits to perform job matching analysis. Get credits below!');
+        pricingSection.classList.remove('hidden');
+        pricingSection.scrollIntoView({ behavior: 'smooth' });
         return;
       }
 
@@ -930,6 +1097,32 @@ We'll analyze:
     // Start Over
     startOverBtn.addEventListener('click', () => {
       location.reload();
+    });
+
+    // Buy Credits
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const packageName = btn.dataset.package;
+        const credits = parseInt(btn.dataset.credits);
+        const price = parseFloat(btn.dataset.price);
+        
+        // TODO: Integrate Stripe Checkout here
+        // For now, simulate purchase (testing mode)
+        const confirmed = confirm(
+          `Purchase ${packageName.toUpperCase()} package?\n\n` +
+          `${credits} credits for $${price}\n\n` +
+          `Click OK to simulate purchase (Stripe integration coming soon)`
+        );
+        
+        if (confirmed) {
+          const currentCredits = getCredits();
+          localStorage.setItem('resumeRoasterCredits', currentCredits + credits);
+          updateCreditsDisplay();
+          pricingSection.classList.add('hidden');
+          alert(`✅ Success! ${credits} credits added to your account.`);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     });
 
     function showError(message) {
