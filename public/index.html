@@ -29,6 +29,9 @@
 
     [data-theme="dark"] {
       --primary-navy: #FFFFFF;
+      --accent-coral: #FF6B5A;
+      --accent-blue: #3B82F6;
+      --success-green: #10B981;
       --bg-white: #0D0D0D;
       --bg-gray: #171717;
       --text-dark: #FFFFFF;
@@ -37,31 +40,6 @@
       --border-light: rgba(255, 255, 255, 0.1);
       --gradient-start: #1a1a2e;
       --gradient-end: #16213e;
-      
-      /* Spacing */
-      --space-xs: 8px;
-      --space-sm: 16px;
-      --space-md: 24px;
-      --space-lg: 32px;
-      --space-xl: 48px;
-      --space-2xl: 64px;
-      --space-3xl: 96px;
-      --space-4xl: 128px;
-      
-      /* Typography */
-      --font-base: 18px;
-      --font-sm: 14px;
-      --font-lg: 20px;
-      --h1: 64px;
-      --h2: 48px;
-      --h3: 32px;
-      --h4: 24px;
-      
-      /* Shadows */
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -167,7 +145,7 @@
 
     .btn-primary {
       background: var(--accent-coral);
-      color: white;
+      color: #FFFFFF;
     }
 
     .btn-primary:hover {
@@ -177,14 +155,14 @@
     }
 
     .btn-secondary {
-      background: white;
-      color: var(--primary-navy);
-      border: 2px solid var(--primary-navy);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      border: 2px solid var(--text-dark);
     }
 
     .btn-secondary:hover {
-      background: var(--primary-navy);
-      color: white;
+      background: var(--text-dark);
+      color: var(--bg-white);
     }
 
     .btn-lg {
@@ -675,8 +653,8 @@
     }
 
     .final-cta .btn {
-      background: white;
-      color: var(--primary-navy);
+      background: #FFFFFF;
+      color: #0A1628;
     }
 
     .final-cta .btn:hover {
@@ -692,7 +670,7 @@
 
     /* Footer */
     footer {
-      background: var(--primary-navy);
+      background: #0A1628;
       color: rgba(255, 255, 255, 0.8);
       padding: var(--space-2xl) 0 var(--space-md);
       transition: background 0.3s;
@@ -700,6 +678,18 @@
 
     [data-theme="dark"] footer {
       background: #0A0A0F;
+    }
+
+    footer h4 {
+      color: #FFFFFF;
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    footer a:hover {
+      color: #FFFFFF;
     }
 
     .footer-grid {
@@ -710,7 +700,6 @@
     }
 
     .footer-column h4 {
-      color: white;
       font-weight: 600;
       margin-bottom: var(--space-sm);
     }
@@ -724,14 +713,9 @@
     }
 
     .footer-links a {
-      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       font-size: var(--font-sm);
       transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: white;
     }
 
     .footer-bottom {
