@@ -359,6 +359,14 @@
       background: rgba(255, 107, 90, 0.2);
     }
 
+    .job-description-section {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
     .intensity-selector {
       margin-bottom: 32px;
     }
@@ -767,7 +775,7 @@
           <span>No signup required • Instant results</span>
         </div>
         <h1>Get Your Resume <span class="highlight">Brutally Roasted</span> by AI</h1>
-        <p class="hero-subtitle">Upload your resume and get actionable feedback in seconds. ATS optimization, keyword analysis, and career advice that actually helps.</p>
+        <p class="hero-subtitle">Upload your resume and get actionable feedback in seconds. Add a job description for deep analysis: keyword matching, skills gaps, and tailored recommendations that get you hired.</p>
         <div class="hero-cta">
           <a href="#upload" class="btn-primary">
             <span>Try Free Roast</span>
@@ -819,6 +827,37 @@
             <button class="remove-file" id="removeFile">✕</button>
           </div>
 
+          <div class="job-description-section">
+            <label class="intensity-label">
+              <span>🎯 Add Job Description (Optional - Unlock Deep Analysis)</span>
+              <span style="color: var(--accent-coral); font-size: 0.85rem; margin-left: 8px;">Recommended</span>
+            </label>
+            <textarea 
+              id="jobDescription" 
+              placeholder="Paste the job description here for targeted resume optimization...
+
+We'll analyze:
+✓ Required skills & experience
+✓ Company culture fit
+✓ Keyword optimization
+✓ ATS compatibility
+✓ Gap identification
+✓ Strategic improvements"
+              style="width: 100%; min-height: 150px; padding: 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; transition: border-color 0.2s ease;"
+              onfocus="this.style.borderColor='var(--border-hover)'"
+              onblur="this.style.borderColor='var(--border)'"
+            ></textarea>
+            <div style="margin-top: 12px; padding: 12px 16px; background: rgba(255, 107, 90, 0.1); border: 1px solid rgba(255, 107, 90, 0.2); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+              <span style="color: var(--accent-coral); font-weight: 600;">💡 Pro Tip:</span> Adding a job description gives you:
+              <ul style="margin: 8px 0 0 20px; padding: 0;">
+                <li>Keyword match analysis</li>
+                <li>Skills gap identification</li>
+                <li>Tailored resume recommendations</li>
+                <li>ATS optimization for that specific role</li>
+              </ul>
+            </div>
+          </div>
+
           <div class="intensity-selector">
             <label class="intensity-label">Choose feedback intensity</label>
             <div class="intensity-options">
@@ -839,7 +878,7 @@
 
           <button class="btn-primary" id="roastBtn" disabled style="width: 100%; justify-content: center;">
             <span>🔥</span>
-            <span>Roast My Resume</span>
+            <span id="roastBtnText">Analyze My Resume</span>
           </button>
 
           <div class="error" id="error"></div>
@@ -880,35 +919,36 @@
         </div>
 
         <div class="features-grid">
-          <div class="feature-card">
+          <div class="feature-card" style="border: 2px solid var(--accent-coral); position: relative;">
+            <div style="position: absolute; top: -12px; right: 16px; background: var(--accent-coral); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;">NEW</div>
             <span class="feature-icon">🎯</span>
-            <h3 class="feature-title">ATS Score Analysis</h3>
-            <p class="feature-description">See how your resume performs against Applicant Tracking Systems used by 90% of companies.</p>
+            <h3 class="feature-title">Job Description Matching</h3>
+            <p class="feature-description">Paste any job description for AI-powered analysis. Get keyword matches, skills gaps, and tailored recommendations to land that specific role.</p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">🔍</span>
-            <h3 class="feature-title">Keyword Optimization</h3>
-            <p class="feature-description">Discover missing keywords and optimize your resume for specific roles and industries.</p>
+            <h3 class="feature-title">Deep Keyword Analysis</h3>
+            <p class="feature-description">Discover missing keywords from job postings and optimize your resume for ATS compatibility and recruiter searches.</p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">💡</span>
-            <h3 class="feature-title">Actionable Feedback</h3>
-            <p class="feature-description">Get specific, implementable suggestions you can apply today to improve your resume.</p>
+            <h3 class="feature-title">Ready-to-Use Fixes</h3>
+            <p class="feature-description">Get specific before→after examples you can copy-paste. No vague advice - actual text you can use immediately.</p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">📊</span>
-            <h3 class="feature-title">Section-by-Section Breakdown</h3>
-            <p class="feature-description">Deep analysis of every resume section with targeted improvements for each.</p>
+            <h3 class="feature-title">ATS Compatibility Score</h3>
+            <p class="feature-description">See how your resume performs against Applicant Tracking Systems. Get specific fixes to improve your score.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🎓</span>
+            <h3 class="feature-title">Skills Gap Identification</h3>
+            <p class="feature-description">Discover what skills the job requires that you're not highlighting. Learn how to reframe your experience to match.</p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">⚡</span>
-            <h3 class="feature-title">Instant Results</h3>
-            <p class="feature-description">Get comprehensive feedback in under 2 minutes. No waiting, no delays.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🔒</span>
-            <h3 class="feature-title">100% Private</h3>
-            <p class="feature-description">Your resume is never stored. Processed securely and deleted immediately after analysis.</p>
+            <h3 class="feature-title">Instant Deep Analysis</h3>
+            <p class="feature-description">Get comprehensive feedback in under 2 minutes. Both resume-only and job-matched analysis modes available.</p>
           </div>
         </div>
       </div>
@@ -1137,6 +1177,18 @@
       });
     });
 
+    // Update button text based on job description
+    const jobDescription = document.getElementById('jobDescription');
+    const roastBtnText = document.getElementById('roastBtnText');
+    
+    jobDescription.addEventListener('input', () => {
+      if (jobDescription.value.trim().length > 50) {
+        roastBtnText.textContent = 'Analyze Resume + Job Match';
+      } else {
+        roastBtnText.textContent = 'Analyze My Resume';
+      }
+    });
+
     // Roast button
     roastBtn.addEventListener('click', async () => {
       if (!selectedFile) return;
@@ -1151,17 +1203,38 @@
       uploadCard.classList.add('hidden');
       loading.classList.add('show');
 
+      // Update loading messages if job description provided
+      const hasJobDesc = jobDescription.value.trim().length > 50;
+      const baseMessages = loadingMessages;
+      const jobMatchMessages = [
+        "Analyzing resume content...",
+        "Parsing job description...",
+        "Extracting required skills...",
+        "Identifying keyword matches...",
+        "Analyzing experience gaps...",
+        "Calculating ATS compatibility...",
+        "Generating tailored recommendations...",
+        "Comparing qualifications..."
+      ];
+      
+      const messages = hasJobDesc ? jobMatchMessages : baseMessages;
+
       // Rotate loading messages
       let msgIndex = 0;
       const msgInterval = setInterval(() => {
-        msgIndex = (msgIndex + 1) % loadingMessages.length;
-        loadingSubtext.textContent = loadingMessages[msgIndex];
+        msgIndex = (msgIndex + 1) % messages.length;
+        loadingSubtext.textContent = messages[msgIndex];
       }, 2000);
 
       try {
         const formData = new FormData();
         formData.append('resume', selectedFile);
         formData.append('intensity', selectedIntensity);
+        
+        // Add job description if provided
+        if (hasJobDesc) {
+          formData.append('jobDescription', jobDescription.value.trim());
+        }
 
         const response = await fetch('/api/roast', {
           method: 'POST',
