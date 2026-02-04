@@ -25,6 +25,18 @@
       --border-light: #E5E7EB;
       --gradient-start: #0A1628;
       --gradient-end: #3B82F6;
+    }
+
+    [data-theme="dark"] {
+      --primary-navy: #FFFFFF;
+      --bg-white: #0D0D0D;
+      --bg-gray: #171717;
+      --text-dark: #FFFFFF;
+      --text-gray: #A3A3A3;
+      --text-light: #737373;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --gradient-start: #1a1a2e;
+      --gradient-end: #16213e;
       
       /* Spacing */
       --space-xs: 8px;
@@ -70,6 +82,7 @@
       background: var(--bg-white);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* Container */
@@ -94,6 +107,11 @@
       border-bottom: 1px solid var(--border-light);
       z-index: 1000;
       padding: var(--space-md) 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(13, 13, 13, 0.95);
     }
 
     .header-content {
@@ -175,6 +193,27 @@
       border-radius: 12px;
     }
 
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--bg-gray);
+      border: 1px solid var(--border-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.2s;
+      margin-left: var(--space-sm);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-coral);
+    }
+
     /* Hero Section */
     .hero {
       background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
@@ -182,6 +221,7 @@
       padding: var(--space-4xl) 0 var(--space-3xl);
       position: relative;
       overflow: hidden;
+      transition: background 0.3s;
     }
 
     .hero::before {
@@ -259,6 +299,7 @@
       background: var(--bg-gray);
       padding: var(--space-2xl) 0;
       text-align: center;
+      transition: background 0.3s;
     }
 
     .social-proof-title {
@@ -348,7 +389,7 @@
     }
 
     .feature-card {
-      background: white;
+      background: var(--bg-white);
       border: 1px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-lg);
@@ -430,7 +471,7 @@
     }
 
     .pricing-card {
-      background: white;
+      background: var(--bg-white);
       border: 2px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-xl);
@@ -533,10 +574,11 @@
     }
 
     .testimonial-card {
-      background: white;
+      background: var(--bg-white);
       border: 1px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-lg);
+      transition: all 0.3s;
     }
 
     .testimonial-stars {
@@ -744,6 +786,9 @@
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
           <a href="/app" class="btn btn-primary">Get Started</a>
+          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+            <span id="themeIcon">🌙</span>
+          </button>
         </nav>
       </div>
     </div>
@@ -1099,6 +1144,27 @@
   </footer>
 
   <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to light
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeIcon(theme);
+    });
+
+    function updateThemeIcon(theme) {
+      themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
