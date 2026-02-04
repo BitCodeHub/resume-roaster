@@ -876,7 +876,13 @@ We'll analyze:
 
     // Credits management
     function getCredits() {
-      return parseInt(localStorage.getItem('resumeRoasterCredits') || '10');
+      const currentCredits = parseInt(localStorage.getItem('resumeRoasterCredits') || '10');
+      // One-time upgrade: if user has less than 10 credits, bump them up to 10
+      if (currentCredits < 10) {
+        localStorage.setItem('resumeRoasterCredits', '10');
+        return 10;
+      }
+      return currentCredits;
     }
 
     function useCredit() {
