@@ -29,6 +29,10 @@
       --border-light: rgba(255, 255, 255, 0.1);
     }
 
+    [data-theme="dark"] footer {
+      background: #0A0A0F !important;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -831,6 +835,15 @@ We'll analyze:
       </div>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer style="background: var(--primary-navy); color: rgba(255, 255, 255, 0.8); padding: 32px 0; text-align: center; margin-top: 60px; transition: background 0.3s;">
+    <div class="container">
+      <p style="font-size: 14px;">
+        © 2026 Resume Roaster • Built by <a href="https://lumenai.solutions" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600;">Lumen AI Solutions</a> featuring <a href="https://lunalabs.ai" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600;">Luna Labs</a>
+      </p>
+    </div>
+  </footer>
 
   <script>
     // Theme Toggle
