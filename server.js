@@ -5,10 +5,28 @@ const pdfParse = require('pdf-parse');
 const { AzureOpenAI } = require('openai');
 const path = require('path');
 
+const mammoth = require('mammoth');
+
 const app = express();
 const upload = multer({ 
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword', // .doc
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+      'text/plain',
+      'text/rtf',
+      'application/rtf'
+    ];
+    
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Supported: PDF, DOC, DOCX, TXT, RTF'));
+    }
+  }
 });
 
 const openai = new AzureOpenAI({
@@ -26,6 +44,58 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Parse resume based on file type
+async function parseResume(file) {
+  const mimeType = file.mimetype;
+  const buffer = file.buffer;
+  
+  try {
+    // PDF
+    if (mimeType === 'application/pdf') {
+      const pdfData = await pdfParse(buffer);
+      return pdfData.text;
+    }
+    
+    // DOCX
+    if (mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      const result = await mammoth.extractRawText({ buffer });
+      return result.value;
+    }
+    
+    // DOC (legacy Word format)
+    if (mimeType === 'application/msword') {
+      // For .doc files, try mammoth first
+      try {
+        const result = await mammoth.extractRawText({ buffer });
+        if (result.value && result.value.trim().length > 0) {
+          return result.value;
+        }
+      } catch (e) {
+        // Fall back to textract if mammoth fails
+      }
+      
+      // Convert buffer to text (simple extraction)
+      return buffer.toString('utf8');
+    }
+    
+    // TXT
+    if (mimeType === 'text/plain') {
+      return buffer.toString('utf8');
+    }
+    
+    // RTF
+    if (mimeType === 'text/rtf' || mimeType === 'application/rtf') {
+      // Basic RTF parsing (strip RTF codes)
+      const text = buffer.toString('utf8');
+      return text.replace(/\\[a-z]+\d*\s?/g, '').replace(/[{}]/g, '').trim();
+    }
+    
+    throw new Error('Unsupported file type');
+  } catch (error) {
+    throw new Error(`Could not parse ${file.originalname}. ${error.message}`);
+  }
+}
+
 // Roast endpoint
 app.post('/api/roast', upload.single('resume'), async (req, res) => {
   try {
@@ -33,17 +103,18 @@ app.post('/api/roast', upload.single('resume'), async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    // Parse PDF
+    // Parse resume based on file type
     let resumeText;
     try {
-      const pdfData = await pdfParse(req.file.buffer);
-      resumeText = pdfData.text;
+      resumeText = await parseResume(req.file);
     } catch (e) {
-      return res.status(400).json({ error: 'Could not parse PDF. Make sure it\'s a valid PDF file.' });
+      return res.status(400).json({ error: e.message });
     }
 
     if (!resumeText || resumeText.trim().length < 50) {
-      return res.status(400).json({ error: 'Resume appears to be empty or too short. Is this a scanned image? We need text-based PDFs.' });
+      return res.status(400).json({ 
+        error: 'Resume appears to be empty or too short. Make sure your file contains readable text (not scanned images).' 
+      });
     }
 
     // Get the roast intensity

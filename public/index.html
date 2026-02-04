@@ -807,8 +807,8 @@
           <div class="upload-zone" id="dropZone">
             <div class="upload-icon">📄</div>
             <p class="upload-text">Drop your resume here or click to upload</p>
-            <p class="upload-hint">PDF only • Max 5MB</p>
-            <input type="file" id="fileInput" accept=".pdf">
+            <p class="upload-hint">PDF, DOC, DOCX, TXT, RTF • Max 10MB</p>
+            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt,.rtf">
           </div>
 
           <div class="file-selected hidden" id="fileSelected">
@@ -1082,10 +1082,23 @@
       e.preventDefault();
       dropZone.classList.remove('dragover');
       const file = e.dataTransfer.files[0];
-      if (file && file.type === 'application/pdf') {
+      
+      const allowedTypes = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'text/plain',
+        'text/rtf',
+        'application/rtf'
+      ];
+      
+      const allowedExtensions = ['.pdf', '.doc', '.docx', '.txt', '.rtf'];
+      const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+      
+      if (file && (allowedTypes.includes(file.type) || allowedExtensions.includes(fileExtension))) {
         selectFile(file);
       } else {
-        showError('Please upload a PDF file');
+        showError('Please upload a supported file type (PDF, DOC, DOCX, TXT, RTF)');
       }
     });
 
@@ -1095,8 +1108,8 @@
     });
 
     function selectFile(file) {
-      if (file.size > 5 * 1024 * 1024) {
-        showError('File size must be under 5MB');
+      if (file.size > 10 * 1024 * 1024) {
+        showError('File size must be under 10MB');
         return;
       }
       selectedFile = file;
