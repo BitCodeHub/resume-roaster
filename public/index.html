@@ -104,7 +104,7 @@
       gap: var(--space-sm);
       font-size: 24px;
       font-weight: 700;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       text-decoration: none;
       transition: opacity 0.2s;
     }
@@ -128,7 +128,7 @@
     }
 
     .nav a:hover {
-      color: var(--primary-navy);
+      color: var(--text-dark);
     }
 
     .btn {
@@ -195,11 +195,27 @@
     /* Hero Section */
     .hero {
       background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-      color: white;
+      color: #FFFFFF;
       padding: var(--space-4xl) 0 var(--space-3xl);
       position: relative;
       overflow: hidden;
       transition: background 0.3s;
+    }
+
+    .hero h1,
+    .hero p,
+    .hero .hero-subtitle,
+    .hero .hero-trust,
+    .hero .trust-item {
+      color: #FFFFFF;
+    }
+
+    .hero .hero-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero .hero-trust {
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .hero::before {
@@ -306,7 +322,7 @@
     /* Stats Section */
     .stats {
       padding: var(--space-3xl) 0;
-      background: white;
+      background: var(--bg-white);
     }
 
     .stats-grid {
@@ -348,7 +364,7 @@
     .section-title {
       font-size: var(--h2);
       font-weight: 800;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       margin-bottom: var(--space-sm);
       line-height: 1.2;
     }
@@ -389,7 +405,7 @@
     .feature-title {
       font-size: var(--h4);
       font-weight: 700;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       margin-bottom: var(--space-xs);
     }
 
@@ -428,7 +444,7 @@
     .step-title {
       font-size: var(--h4);
       font-weight: 700;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       margin-bottom: var(--space-xs);
     }
 
@@ -485,14 +501,14 @@
     .pricing-name {
       font-size: var(--h4);
       font-weight: 700;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       margin-bottom: var(--space-xs);
     }
 
     .pricing-price {
       font-size: 48px;
       font-weight: 800;
-      color: var(--primary-navy);
+      color: var(--accent-coral);
       line-height: 1;
       margin-bottom: var(--space-xs);
     }
@@ -583,7 +599,7 @@
       height: 48px;
       border-radius: 50%;
       background: var(--accent-blue);
-      color: white;
+      color: #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -597,7 +613,7 @@
 
     .testimonial-name {
       font-weight: 600;
-      color: var(--primary-navy);
+      color: var(--text-dark);
     }
 
     .testimonial-title {
@@ -607,7 +623,7 @@
 
     /* FAQ */
     .faq {
-      background: white;
+      background: var(--bg-white);
     }
 
     .faq-list {
@@ -623,7 +639,7 @@
     .faq-question {
       font-size: var(--font-lg);
       font-weight: 600;
-      color: var(--primary-navy);
+      color: var(--text-dark);
       margin-bottom: var(--space-xs);
     }
 
@@ -635,7 +651,7 @@
     /* Final CTA */
     .final-cta {
       background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-      color: white;
+      color: #FFFFFF;
       padding: var(--space-3xl) 0;
       text-align: center;
     }
@@ -644,6 +660,7 @@
       font-size: var(--h2);
       font-weight: 800;
       margin-bottom: var(--space-sm);
+      color: #FFFFFF;
     }
 
     .final-cta p {
