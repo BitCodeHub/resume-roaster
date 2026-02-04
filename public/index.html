@@ -15,6 +15,8 @@
       --accent-coral: #FF6B5A;
       --accent-coral-light: #FF8A7C;
       --accent-coral-dark: #FF4D39;
+      --accent-green: #00D9A3;
+      --accent-yellow: #FFBE5C;
       --text-primary: #FFFFFF;
       --text-secondary: #A3A3A3;
       --text-muted: #737373;
@@ -74,12 +76,6 @@
       font-size: 1.8rem;
     }
 
-    .header-cta {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
     .credits-display {
       padding: 8px 16px;
       background: var(--bg-secondary);
@@ -94,206 +90,104 @@
       border-color: var(--border-hover);
     }
 
-    .btn-header {
-      padding: 10px 20px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-
-    .btn-header:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-tertiary);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 100px 0 80px 0;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-    }
-
-    .hero-badge .icon {
-      color: var(--accent-coral);
-    }
-
-    h1 {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-    }
-
-    h1 .highlight {
-      color: var(--accent-coral);
-    }
-
-    .hero-subtitle {
-      font-size: 1.3rem;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-cta {
+    /* Progress Steps */
+    .progress-steps {
       display: flex;
-      gap: 16px;
       justify-content: center;
-      margin-bottom: 48px;
-    }
-
-    .btn-primary {
-      padding: 16px 32px;
-      background: var(--accent-coral);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-coral-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255, 107, 90, 0.3);
-    }
-
-    .btn-secondary {
-      padding: 16px 32px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text-primary);
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-secondary);
-    }
-
-    .stats {
-      display: flex;
       gap: 40px;
-      justify-content: center;
-      padding: 24px;
+      padding: 40px 0;
+      margin-bottom: 40px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      opacity: 1;
+    }
+
+    .step.completed {
+      opacity: 1;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
       background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 1.8rem;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
-      color: var(--accent-coral);
-      margin-bottom: 4px;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
     }
 
-    .stat-label {
+    .step.active .step-number {
+      border-color: var(--accent-coral);
+      background: rgba(255, 107, 90, 0.1);
+      color: var(--accent-coral);
+    }
+
+    .step.completed .step-number {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: white;
+    }
+
+    .step-label {
       font-size: 0.9rem;
+      font-weight: 600;
       color: var(--text-muted);
     }
 
-    /* Upload Section */
-    .upload-section {
-      padding: 80px 0;
+    .step.active .step-label,
+    .step.completed .step-label {
+      color: var(--text-primary);
+    }
+
+    /* Card */
+    .card {
       background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-tag {
-      display: inline-block;
-      padding: 6px 14px;
-      background: var(--bg-tertiary);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-coral);
-      font-weight: 600;
-      margin-bottom: 16px;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto 40px;
     }
 
     .section-title {
       font-family: 'DM Sans', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      text-align: center;
     }
 
     .section-subtitle {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
+      text-align: center;
+      margin-bottom: 32px;
     }
 
-    .upload-card {
-      max-width: 700px;
-      margin: 0 auto;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 48px;
-    }
-
+    /* Upload Zone */
     .upload-zone {
-      background: var(--bg-secondary);
+      background: var(--bg-primary);
       border: 2px dashed var(--border);
       border-radius: 12px;
       padding: 60px 40px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .upload-zone:hover {
@@ -324,7 +218,7 @@
     }
 
     .file-selected {
-      background: var(--bg-secondary);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 16px 20px;
@@ -359,14 +253,7 @@
       background: rgba(255, 107, 90, 0.2);
     }
 
-    .job-description-section {
-      margin-bottom: 32px;
-      padding: 24px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
+    /* Intensity Selector */
     .intensity-selector {
       margin-bottom: 32px;
     }
@@ -389,7 +276,7 @@
       padding: 16px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      background: var(--bg-secondary);
+      background: var(--bg-primary);
       color: var(--text-primary);
       cursor: pointer;
       transition: all 0.2s ease;
@@ -416,215 +303,65 @@
       font-weight: 600;
     }
 
-    /* Features */
-    .features-section {
-      padding: 100px 0;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-      margin-top: 60px;
-    }
-
-    .feature-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-    }
-
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .feature-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .feature-description {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* Pricing */
-    .pricing-section {
-      padding: 100px 0;
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 900px;
-      margin: 0 auto;
-      margin-top: 60px;
-    }
-
-    .pricing-card {
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      text-align: center;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .pricing-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-    }
-
-    .pricing-card.featured {
-      border-color: var(--accent-coral);
-      box-shadow: 0 8px 32px rgba(255, 107, 90, 0.2);
-    }
-
-    .featured-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Buttons */
+    .btn-primary {
+      width: 100%;
+      padding: 18px 32px;
       background: var(--accent-coral);
+      border: none;
+      border-radius: 12px;
       color: white;
-      padding: 4px 16px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .pricing-name {
       font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--text-secondary);
-    }
-
-    .pricing-price {
-      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .pricing-credits {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 24px;
-    }
-
-    .pricing-value {
-      color: var(--accent-coral);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 32px;
-      text-align: left;
-    }
-
-    .pricing-features li {
-      padding: 10px 0;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .pricing-features li::before {
-      content: "✓";
-      color: var(--accent-coral);
-      font-weight: bold;
-      font-size: 1.2rem;
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-coral-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 107, 90, 0.3);
     }
 
-    /* Loading & Results */
-    .loading, .results {
-      display: none;
-      max-width: 900px;
-      margin: 80px auto;
-      padding: 0 24px;
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
-    .loading.show, .results.show {
-      display: block;
+    .btn-magic {
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-yellow));
+      animation: glow 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 190, 92, 0.3);
     }
 
-    .loading {
-      text-align: center;
-      padding: 100px 24px;
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 190, 92, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(255, 190, 92, 0.6); }
     }
 
-    .loading-spinner {
-      width: 60px;
-      height: 60px;
-      border: 3px solid var(--bg-tertiary);
-      border-top-color: var(--accent-coral);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 32px;
+    .btn-magic:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(255, 190, 92, 0.5);
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .loading-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .loading-subtext {
-      color: var(--text-muted);
-    }
-
+    /* Results */
     .results-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 48px;
-    }
-
-    .results-header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .results-title {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
+      padding: 40px;
+      margin-bottom: 32px;
     }
 
     .roast-content {
       line-height: 1.9;
       white-space: pre-wrap;
       color: var(--text-secondary);
+      margin-bottom: 32px;
     }
 
     .roast-content h2 {
@@ -646,19 +383,90 @@
       font-weight: 600;
     }
 
-    .results-actions {
-      margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
+    /* Job Description Section (unlocked after roast) */
+    .job-match-section {
+      margin-top: 32px;
+      padding: 32px;
+      background: rgba(255, 107, 90, 0.05);
+      border: 2px dashed rgba(255, 107, 90, 0.3);
+      border-radius: 12px;
       text-align: center;
     }
 
+    .unlock-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--accent-green);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      resize: vertical;
+      margin-bottom: 16px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-coral);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--bg-tertiary);
+      border-top-color: var(--accent-coral);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 24px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .loading-subtext {
+      color: var(--text-muted);
+    }
+
+    /* Error */
     .error {
       background: rgba(255, 107, 90, 0.1);
       border: 1px solid rgba(255, 107, 90, 0.3);
       border-radius: 10px;
       padding: 16px 20px;
-      margin-top: 20px;
+      margin-top: 16px;
       color: var(--accent-coral);
       display: none;
     }
@@ -667,82 +475,27 @@
       display: block;
     }
 
-    /* Footer */
-    footer {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .footer-content {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .footer-content p {
-      margin-bottom: 8px;
-    }
-
-    .footer-content a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-content a:hover {
-      color: var(--accent-coral);
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero {
-        padding: 60px 0 40px 0;
-      }
-
-      .hero-cta {
-        flex-direction: column;
-      }
-
-      .stats {
-        flex-direction: column;
+      .progress-steps {
         gap: 20px;
       }
 
-      .upload-card {
-        padding: 32px 24px;
+      .step-label {
+        font-size: 0.8rem;
       }
 
-      .upload-zone {
-        padding: 40px 24px;
+      .card {
+        padding: 24px;
       }
 
       .intensity-options {
         gap: 8px;
       }
 
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
       .results-card {
-        padding: 32px 24px;
+        padding: 24px;
       }
-
-      .header-cta {
-        display: none;
-      }
-    }
-
-    .hidden {
-      display: none;
     }
 
     input[type="file"] {
@@ -754,282 +507,167 @@
   <header>
     <div class="container">
       <div class="header-content">
-        <a href="#" class="logo">
+        <a href="#" class="logo" onclick="location.reload()">
           <span class="logo-icon">🔥</span>
           <span>Resume Roaster</span>
         </a>
-        <div class="header-cta">
-          <div class="credits-display" id="headerCredits">0 credits</div>
-          <a href="#pricing" class="btn-header">Get Credits</a>
-        </div>
+        <div class="credits-display" id="headerCredits">0 credits</div>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-badge">
-          <span class="icon">⚡</span>
-          <span>No signup required • Instant results</span>
+    <!-- Progress Steps -->
+    <div class="container">
+      <div class="progress-steps">
+        <div class="step active" id="step1">
+          <div class="step-number">1</div>
+          <div class="step-label">Upload & Roast</div>
         </div>
-        <h1>Get Your Resume <span class="highlight">Brutally Roasted</span> by AI</h1>
-        <p class="hero-subtitle">Upload your resume and get actionable feedback in seconds. Add a job description for deep analysis: keyword matching, skills gaps, and tailored recommendations that get you hired.</p>
-        <div class="hero-cta">
-          <a href="#upload" class="btn-primary">
-            <span>Try Free Roast</span>
-            <span>→</span>
-          </a>
-          <a href="#features" class="btn-secondary">
-            <span>See Features</span>
-          </a>
+        <div class="step" id="step2">
+          <div class="step-number">2</div>
+          <div class="step-label">Job Match (Optional)</div>
         </div>
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-number">10K+</div>
-            <div class="stat-label">Resumes Analyzed</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">4.9/5</div>
-            <div class="stat-label">Average Rating</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">2 min</div>
-            <div class="stat-label">Avg. Analysis Time</div>
-          </div>
+        <div class="step" id="step3">
+          <div class="step-number">3</div>
+          <div class="step-label">Auto-Fix Magic</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Upload Section -->
-    <section class="upload-section" id="upload">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Try It Now</div>
-          <h2 class="section-title">Upload Your Resume</h2>
-          <p class="section-subtitle">Get your first roast free. No signup, no credit card required.</p>
+    <!-- Step 1: Upload & Roast -->
+    <div id="uploadSection" class="container">
+      <div class="card">
+        <h2 class="section-title">Step 1: Upload Your Resume</h2>
+        <p class="section-subtitle">Get brutally honest AI feedback on your resume</p>
+
+        <div class="upload-zone" id="dropZone">
+          <div class="upload-icon">📄</div>
+          <p class="upload-text">Drop your resume here or click to upload</p>
+          <p class="upload-hint">PDF, DOC, DOCX, TXT, RTF • Max 10MB</p>
+          <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt,.rtf">
         </div>
 
-        <div class="upload-card" id="uploadCard">
-          <div class="upload-zone" id="dropZone">
-            <div class="upload-icon">📄</div>
-            <p class="upload-text">Drop your resume here or click to upload</p>
-            <p class="upload-hint">PDF, DOC, DOCX, TXT, RTF • Max 10MB</p>
-            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt,.rtf">
-          </div>
-
-          <div class="file-selected hidden" id="fileSelected">
-            <span class="file-name">
-              <span>📄</span>
-              <span id="fileName"></span>
-            </span>
-            <button class="remove-file" id="removeFile">✕</button>
-          </div>
-
-          <div class="job-description-section">
-            <label class="intensity-label">
-              <span>🎯 Add Job Description (Optional - Unlock Deep Analysis)</span>
-              <span style="color: var(--accent-coral); font-size: 0.85rem; margin-left: 8px;">Recommended</span>
-            </label>
-            <textarea 
-              id="jobDescription" 
-              placeholder="Paste the job description here for targeted resume optimization...
-
-We'll analyze:
-✓ Required skills & experience
-✓ Company culture fit
-✓ Keyword optimization
-✓ ATS compatibility
-✓ Gap identification
-✓ Strategic improvements"
-              style="width: 100%; min-height: 150px; padding: 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; line-height: 1.6; resize: vertical; transition: border-color 0.2s ease;"
-              onfocus="this.style.borderColor='var(--border-hover)'"
-              onblur="this.style.borderColor='var(--border)'"
-            ></textarea>
-            <div style="margin-top: 12px; padding: 12px 16px; background: rgba(255, 107, 90, 0.1); border: 1px solid rgba(255, 107, 90, 0.2); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary);">
-              <span style="color: var(--accent-coral); font-weight: 600;">💡 Pro Tip:</span> Adding a job description gives you:
-              <ul style="margin: 8px 0 0 20px; padding: 0;">
-                <li>Keyword match analysis</li>
-                <li>Skills gap identification</li>
-                <li>Tailored resume recommendations</li>
-                <li>ATS optimization for that specific role</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="intensity-selector">
-            <label class="intensity-label">Choose feedback intensity</label>
-            <div class="intensity-options">
-              <button class="intensity-btn" data-intensity="mild">
-                <span class="emoji">😊</span>
-                <span class="label">Gentle</span>
-              </button>
-              <button class="intensity-btn active" data-intensity="medium">
-                <span class="emoji">😈</span>
-                <span class="label">Honest</span>
-              </button>
-              <button class="intensity-btn" data-intensity="brutal">
-                <span class="emoji">💀</span>
-                <span class="label">Savage</span>
-              </button>
-            </div>
-          </div>
-
-          <button class="btn-primary" id="roastBtn" disabled style="width: 100%; justify-content: center;">
-            <span>🔥</span>
-            <span id="roastBtnText">Analyze My Resume</span>
-          </button>
-
-          <div class="error" id="error"></div>
+        <div class="file-selected hidden" id="fileSelected">
+          <span class="file-name">
+            <span>📄</span>
+            <span id="fileName"></span>
+          </span>
+          <button class="remove-file" id="removeFile">✕</button>
         </div>
+
+        <div class="intensity-selector">
+          <label class="intensity-label">Choose feedback intensity</label>
+          <div class="intensity-options">
+            <button class="intensity-btn" data-intensity="mild">
+              <span class="emoji">😊</span>
+              <span class="label">Gentle</span>
+            </button>
+            <button class="intensity-btn active" data-intensity="medium">
+              <span class="emoji">😈</span>
+              <span class="label">Honest</span>
+            </button>
+            <button class="intensity-btn" data-intensity="brutal">
+              <span class="emoji">💀</span>
+              <span class="label">Savage</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="roastBtn" disabled>
+          <span>🔥</span>
+          <span>Roast My Resume</span>
+        </button>
+
+        <div class="error" id="error"></div>
       </div>
-    </section>
+    </div>
 
     <!-- Loading -->
-    <div class="loading" id="loading">
-      <div class="loading-spinner"></div>
-      <p class="loading-text">Analyzing your resume...</p>
-      <p class="loading-subtext" id="loadingSubtext">Preparing feedback...</p>
+    <div id="loading" class="container hidden">
+      <div class="card">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">Analyzing your resume...</p>
+          <p class="loading-subtext" id="loadingSubtext">Preparing feedback...</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Results -->
-    <div class="results" id="results">
+    <!-- Step 2: Results + Job Match -->
+    <div id="resultsSection" class="container hidden">
       <div class="results-card">
-        <div class="results-header">
-          <h2 class="results-title">🔥 Your Resume Analysis</h2>
-        </div>
+        <h2 class="section-title">🔥 Your Resume Roast</h2>
         <div class="roast-content" id="roastContent"></div>
-        <div class="results-actions">
-          <button class="btn-primary" id="roastAgain">
-            <span>↻</span>
-            <span>Analyze Another Resume</span>
+      </div>
+
+      <!-- Unlocked: Job Description Matching -->
+      <div class="card">
+        <div class="job-match-section">
+          <div class="unlock-badge">✨ STEP 2 UNLOCKED</div>
+          <h2 class="section-title">Want Tailored Recommendations?</h2>
+          <p class="section-subtitle" style="margin-bottom: 24px;">Paste a job description to get keyword analysis, skills gap identification, and specific before→after fixes for that role.</p>
+          
+          <textarea 
+            id="jobDescription" 
+            placeholder="Paste the job description here...
+
+We'll analyze:
+✓ Keyword matches & gaps
+✓ Required vs. actual skills
+✓ Experience alignment
+✓ ATS optimization for this job
+✓ Before → After recommendations"
+          ></textarea>
+
+          <button class="btn-primary" id="analyzeJobBtn">
+            <span>🎯</span>
+            <span>Analyze & Recommend Fixes</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Features -->
-    <section class="features-section" id="features">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Features</div>
-          <h2 class="section-title">Everything You Need to Stand Out</h2>
-          <p class="section-subtitle">Comprehensive AI analysis powered by the latest language models</p>
-        </div>
-
-        <div class="features-grid">
-          <div class="feature-card" style="border: 2px solid var(--accent-coral); position: relative;">
-            <div style="position: absolute; top: -12px; right: 16px; background: var(--accent-coral); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;">NEW</div>
-            <span class="feature-icon">🎯</span>
-            <h3 class="feature-title">Job Description Matching</h3>
-            <p class="feature-description">Paste any job description for AI-powered analysis. Get keyword matches, skills gaps, and tailored recommendations to land that specific role.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🔍</span>
-            <h3 class="feature-title">Deep Keyword Analysis</h3>
-            <p class="feature-description">Discover missing keywords from job postings and optimize your resume for ATS compatibility and recruiter searches.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">💡</span>
-            <h3 class="feature-title">Ready-to-Use Fixes</h3>
-            <p class="feature-description">Get specific before→after examples you can copy-paste. No vague advice - actual text you can use immediately.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">📊</span>
-            <h3 class="feature-title">ATS Compatibility Score</h3>
-            <p class="feature-description">See how your resume performs against Applicant Tracking Systems. Get specific fixes to improve your score.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🎓</span>
-            <h3 class="feature-title">Skills Gap Identification</h3>
-            <p class="feature-description">Discover what skills the job requires that you're not highlighting. Learn how to reframe your experience to match.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">⚡</span>
-            <h3 class="feature-title">Instant Deep Analysis</h3>
-            <p class="feature-description">Get comprehensive feedback in under 2 minutes. Both resume-only and job-matched analysis modes available.</p>
-          </div>
-        </div>
+    <!-- Step 3: Job-Matched Analysis + Auto-Fix -->
+    <div id="jobMatchSection" class="container hidden">
+      <div class="results-card">
+        <h2 class="section-title">🎯 Job-Matched Analysis</h2>
+        <div class="roast-content" id="jobMatchContent"></div>
       </div>
-    </section>
 
-    <!-- Pricing -->
-    <section class="pricing-section" id="pricing">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Pricing</div>
-          <h2 class="section-title">Simple, Credit-Based Pricing</h2>
-          <p class="section-subtitle">No subscriptions. No commitments. Pay only for what you use.</p>
+      <!-- Auto-Fix Magic Button -->
+      <div class="card">
+        <div style="text-align: center;">
+          <div class="unlock-badge" style="background: var(--accent-yellow); color: var(--bg-primary);">🎮 STEP 3: AUTO-FIX MAGIC</div>
+          <h2 class="section-title" style="margin-top: 16px;">Ready to Transform Your Resume?</h2>
+          <p class="section-subtitle" style="margin-bottom: 24px;">Our AI will automatically apply all recommended fixes. Download your improved resume in one click!</p>
+          
+          <button class="btn-primary btn-magic" id="autoFixBtn">
+            <span>✨</span>
+            <span>Auto-Fix My Resume (Magic!)</span>
+            <span>✨</span>
+          </button>
+          
+          <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.9rem;">
+            Coming soon: AI will rewrite your resume with all fixes applied!
+          </p>
         </div>
-
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <div class="pricing-name">Starter</div>
-            <div class="pricing-price">$5</div>
-            <div class="pricing-credits">3 credits</div>
-            <div class="pricing-value">$1.67 per roast</div>
-            <ul class="pricing-features">
-              <li>Full AI analysis</li>
-              <li>ATS score</li>
-              <li>Keyword suggestions</li>
-              <li>Instant results</li>
-            </ul>
-            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="buyCredits('starter')">
-              Get Started
-            </button>
-          </div>
-
-          <div class="pricing-card featured">
-            <div class="featured-badge">Most Popular</div>
-            <div class="pricing-name">Pro</div>
-            <div class="pricing-price">$15</div>
-            <div class="pricing-credits">10 credits</div>
-            <div class="pricing-value">$1.50 per roast • Save 10%</div>
-            <ul class="pricing-features">
-              <li>Everything in Starter</li>
-              <li>Compare versions</li>
-              <li>Job description match</li>
-              <li>Priority support</li>
-            </ul>
-            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="buyCredits('pro')">
-              Get Pro
-            </button>
-          </div>
-
-          <div class="pricing-card">
-            <div class="pricing-name">Elite</div>
-            <div class="pricing-price">$29</div>
-            <div class="pricing-credits">25 credits</div>
-            <div class="pricing-value">$1.16 per roast • Save 30%</div>
-            <ul class="pricing-features">
-              <li>Everything in Pro</li>
-              <li>Cover letter feedback</li>
-              <li>LinkedIn optimization</li>
-              <li>Interview prep tips</li>
-            </ul>
-            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="buyCredits('elite')">
-              Get Elite
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <p>Built with 🔥 by <a href="https://lumen-dashboard.onrender.com" target="_blank">Lumen AI Solutions</a></p>
-        <p>Your resume is processed securely and never stored • <a href="#">Privacy Policy</a> • <a href="#">Terms</a></p>
       </div>
     </div>
-  </footer>
+
+    <!-- Start Over Button (shown at bottom after any results) -->
+    <div id="startOverSection" class="container hidden" style="text-align: center; margin-bottom: 60px;">
+      <button class="btn-primary" id="startOverBtn" style="max-width: 300px; margin: 0 auto; background: var(--bg-tertiary); border: 1px solid var(--border);">
+        <span>↻</span>
+        <span>Start Over</span>
+      </button>
+    </div>
+  </main>
 
   <script>
     // Credits management
     function getCredits() {
-      return parseInt(localStorage.getItem('resumeRoasterCredits') || '1'); // 1 free credit
+      return parseInt(localStorage.getItem('resumeRoasterCredits') || '1');
     }
 
     function useCredit() {
@@ -1040,12 +678,6 @@ We'll analyze:
         return true;
       }
       return false;
-    }
-
-    function addCredits(amount) {
-      const current = getCredits();
-      localStorage.setItem('resumeRoasterCredits', current + amount);
-      updateCreditsDisplay();
     }
 
     function updateCreditsDisplay() {
@@ -1059,38 +691,35 @@ We'll analyze:
       }
     }
 
-    function buyCredits(tier) {
-      const packages = {
-        starter: { credits: 3, price: 5 },
-        pro: { credits: 10, price: 15 },
-        elite: { credits: 25, price: 29 }
-      };
-      
-      const pkg = packages[tier];
-      
-      // In production, this would integrate with Stripe
-      // For now, simulate purchase
-      alert(`In production, this would redirect to Stripe Checkout for $${pkg.price}`);
-      
-      // Demo: Add credits immediately
-      addCredits(pkg.credits);
-      alert(`✅ Added ${pkg.credits} credits to your account!`);
-    }
+    // Initialize
+    updateCreditsDisplay();
 
-    // Upload logic
+    // DOM elements
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const fileSelected = document.getElementById('fileSelected');
     const fileName = document.getElementById('fileName');
     const removeFile = document.getElementById('removeFile');
     const roastBtn = document.getElementById('roastBtn');
-    const uploadCard = document.getElementById('uploadCard');
+    const analyzeJobBtn = document.getElementById('analyzeJobBtn');
+    const autoFixBtn = document.getElementById('autoFixBtn');
+    const startOverBtn = document.getElementById('startOverBtn');
+    const jobDescription = document.getElementById('jobDescription');
+    
+    const uploadSection = document.getElementById('uploadSection');
     const loading = document.getElementById('loading');
     const loadingSubtext = document.getElementById('loadingSubtext');
-    const results = document.getElementById('results');
+    const resultsSection = document.getElementById('resultsSection');
+    const jobMatchSection = document.getElementById('jobMatchSection');
+    const startOverSection = document.getElementById('startOverSection');
+    
     const roastContent = document.getElementById('roastContent');
-    const roastAgain = document.getElementById('roastAgain');
+    const jobMatchContent = document.getElementById('jobMatchContent');
     const error = document.getElementById('error');
+
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
 
     let selectedFile = null;
     let selectedIntensity = 'medium';
@@ -1100,15 +729,19 @@ We'll analyze:
       "Checking ATS compatibility...",
       "Evaluating keyword density...",
       "Reviewing achievements...",
-      "Assessing formatting...",
-      "Generating feedback...",
-      "Preparing recommendations..."
+      "Generating feedback..."
     ];
 
-    // Initialize
-    updateCreditsDisplay();
+    const jobMatchMessages = [
+      "Parsing job description...",
+      "Extracting required skills...",
+      "Identifying keyword matches...",
+      "Analyzing experience gaps...",
+      "Calculating ATS compatibility...",
+      "Generating tailored fixes..."
+    ];
 
-    // Drag and drop
+    // Upload handlers
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
       dropZone.classList.add('dragover');
@@ -1122,24 +755,7 @@ We'll analyze:
       e.preventDefault();
       dropZone.classList.remove('dragover');
       const file = e.dataTransfer.files[0];
-      
-      const allowedTypes = [
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'text/plain',
-        'text/rtf',
-        'application/rtf'
-      ];
-      
-      const allowedExtensions = ['.pdf', '.doc', '.docx', '.txt', '.rtf'];
-      const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
-      
-      if (file && (allowedTypes.includes(file.type) || allowedExtensions.includes(fileExtension))) {
-        selectFile(file);
-      } else {
-        showError('Please upload a supported file type (PDF, DOC, DOCX, TXT, RTF)');
-      }
+      if (file) selectFile(file);
     });
 
     dropZone.addEventListener('click', () => fileInput.click());
@@ -1177,64 +793,28 @@ We'll analyze:
       });
     });
 
-    // Update button text based on job description
-    const jobDescription = document.getElementById('jobDescription');
-    const roastBtnText = document.getElementById('roastBtnText');
-    
-    jobDescription.addEventListener('input', () => {
-      if (jobDescription.value.trim().length > 50) {
-        roastBtnText.textContent = 'Analyze Resume + Job Match';
-      } else {
-        roastBtnText.textContent = 'Analyze My Resume';
-      }
-    });
-
-    // Roast button
+    // Step 1: Roast My Resume
     roastBtn.addEventListener('click', async () => {
       if (!selectedFile) return;
 
-      // Check credits
       if (getCredits() === 0) {
-        showError('You need credits to analyze a resume. Get credits below!');
-        document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        showError('You need credits to analyze a resume. Get credits to continue!');
         return;
       }
 
-      uploadCard.classList.add('hidden');
-      loading.classList.add('show');
+      uploadSection.classList.add('hidden');
+      loading.classList.remove('hidden');
 
-      // Update loading messages if job description provided
-      const hasJobDesc = jobDescription.value.trim().length > 50;
-      const baseMessages = loadingMessages;
-      const jobMatchMessages = [
-        "Analyzing resume content...",
-        "Parsing job description...",
-        "Extracting required skills...",
-        "Identifying keyword matches...",
-        "Analyzing experience gaps...",
-        "Calculating ATS compatibility...",
-        "Generating tailored recommendations...",
-        "Comparing qualifications..."
-      ];
-      
-      const messages = hasJobDesc ? jobMatchMessages : baseMessages;
-
-      // Rotate loading messages
       let msgIndex = 0;
       const msgInterval = setInterval(() => {
-        msgIndex = (msgIndex + 1) % messages.length;
-        loadingSubtext.textContent = messages[msgIndex];
+        msgIndex = (msgIndex + 1) % loadingMessages.length;
+        loadingSubtext.textContent = loadingMessages[msgIndex];
       }, 2000);
 
       try {
         const formData = new FormData();
         formData.append('resume', selectedFile);
         formData.append('intensity', selectedIntensity);
-        
-        // Add job description if provided
-        if (hasJobDesc) {
-          formData.append('jobDescription', jobDescription.value.trim());
-        }
 
         const response = await fetch('/api/roast', {
           method: 'POST',
@@ -1244,14 +824,10 @@ We'll analyze:
         const data = await response.json();
         clearInterval(msgInterval);
 
-        if (data.error) {
-          throw new Error(data.error);
-        }
+        if (data.error) throw new Error(data.error);
 
-        // Use credit
         useCredit();
 
-        // Format content
         let content = data.roast;
         content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         content = content.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
@@ -1259,51 +835,112 @@ We'll analyze:
         content = content.replace(/^# (.*?)$/gm, '<h2>$1</h2>');
         
         roastContent.innerHTML = content;
-        loading.classList.remove('show');
-        results.classList.add('show');
+        loading.classList.add('hidden');
+        resultsSection.classList.remove('hidden');
+        startOverSection.classList.remove('hidden');
+
+        // Update progress
+        step1.classList.add('completed');
+        step2.classList.add('active');
         
         setTimeout(() => {
-          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
 
       } catch (err) {
         clearInterval(msgInterval);
-        loading.classList.remove('show');
-        uploadCard.classList.remove('hidden');
+        loading.classList.add('hidden');
+        uploadSection.classList.remove('hidden');
         showError(err.message || 'Something went wrong. Please try again.');
       }
     });
 
-    // Roast again
-    roastAgain.addEventListener('click', () => {
-      results.classList.remove('show');
-      uploadCard.classList.remove('hidden');
-      removeFile.click();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Step 2: Analyze Job Match
+    analyzeJobBtn.addEventListener('click', async () => {
+      const jobDesc = jobDescription.value.trim();
+      
+      if (!jobDesc || jobDesc.length < 50) {
+        showError('Please paste a job description (at least 50 characters)');
+        return;
+      }
+
+      if (getCredits() === 0) {
+        showError('You need credits to perform job matching analysis.');
+        return;
+      }
+
+      resultsSection.classList.add('hidden');
+      loading.classList.remove('hidden');
+
+      let msgIndex = 0;
+      const msgInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % jobMatchMessages.length;
+        loadingSubtext.textContent = jobMatchMessages[msgIndex];
+      }, 2000);
+
+      try {
+        const formData = new FormData();
+        formData.append('resume', selectedFile);
+        formData.append('intensity', selectedIntensity);
+        formData.append('jobDescription', jobDesc);
+
+        const response = await fetch('/api/roast', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+        clearInterval(msgInterval);
+
+        if (data.error) throw new Error(data.error);
+
+        useCredit();
+
+        let content = data.roast;
+        content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        content = content.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+        content = content.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+        content = content.replace(/^# (.*?)$/gm, '<h2>$1</h2>');
+        
+        jobMatchContent.innerHTML = content;
+        loading.classList.add('hidden');
+        jobMatchSection.classList.remove('hidden');
+
+        // Update progress
+        step2.classList.add('completed');
+        step3.classList.add('active');
+        
+        setTimeout(() => {
+          jobMatchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+
+      } catch (err) {
+        clearInterval(msgInterval);
+        loading.classList.add('hidden');
+        resultsSection.classList.remove('hidden');
+        showError(err.message || 'Something went wrong. Please try again.');
+      }
+    });
+
+    // Step 3: Auto-Fix (Coming Soon)
+    autoFixBtn.addEventListener('click', () => {
+      alert('🎮 Auto-Fix Magic is coming soon! This feature will automatically apply all recommended changes to your resume and let you download the improved version.');
+    });
+
+    // Start Over
+    startOverBtn.addEventListener('click', () => {
+      location.reload();
     });
 
     function showError(message) {
       error.textContent = message;
       error.classList.add('show');
-      setTimeout(() => {
-        error.classList.remove('show');
-      }, 5000);
+      setTimeout(() => error.classList.remove('show'), 5000);
     }
 
     function hideError() {
       error.classList.remove('show');
     }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
   </script>
 </body>
 </html>
