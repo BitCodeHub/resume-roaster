@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
-const Anthropic = require('@anthropic-ai/sdk');
+const { AzureOpenAI } = require('openai');
 const path = require('path');
 
 const app = express();
@@ -11,7 +11,12 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
 });
 
-const anthropic = new Anthropic();
+const openai = new AzureOpenAI({
+  apiKey: process.env.AZURE_OPENAI_API_KEY,
+  endpoint: process.env.AZURE_OPENAI_ENDPOINT,
+  apiVersion: process.env.AZURE_OPENAI_API_VERSION,
+  deployment: process.env.AZURE_OPENAI_DEPLOYMENT
+});
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -50,15 +55,16 @@ app.post('/api/roast', upload.single('resume'), async (req, res) => {
       brutal: 'Channel Gordon Ramsay reviewing a resume. Be savage, funny, and brutally honest. Roast hard but make it helpful.'
     };
 
-    // Call Claude for the roast
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+    // Call Azure OpenAI for the roast
+    const completion = await openai.chat.completions.create({
+      model: process.env.AZURE_OPENAI_DEPLOYMENT,
       max_tokens: 2000,
       messages: [{
+        role: 'system',
+        content: 'You are the Resume Roaster - an AI that gives brutally honest resume feedback with a comedic edge.'
+      }, {
         role: 'user',
-        content: `You are the Resume Roaster - an AI that gives brutally honest resume feedback with a comedic edge.
-
-Intensity: ${intensityPrompts[intensity] || intensityPrompts.medium}
+        content: `Intensity: ${intensityPrompts[intensity] || intensityPrompts.medium}
 
 Analyze this resume and provide:
 
@@ -77,7 +83,7 @@ ${resumeText.substring(0, 8000)}
       }]
     });
 
-    const roast = message.content[0].text;
+    const roast = completion.choices[0].message.content;
     
     res.json({ 
       success: true, 
