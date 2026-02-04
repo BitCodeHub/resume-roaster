@@ -52,34 +52,6 @@
       --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Dark Mode */
-    [data-theme="dark"] {
-      --primary-navy: #0A1628;
-      --accent-coral: #FF6B5A;
-      --accent-blue: #3B82F6;
-      --success-green: #10B981;
-      --bg-white: #0D0D0D;
-      --bg-gray: #1A1A1A;
-      --text-dark: #FFFFFF;
-      --text-gray: #A3A3A3;
-      --text-light: #737373;
-      --border-light: rgba(255, 255, 255, 0.1);
-      --gradient-start: #0D0D0D;
-      --gradient-end: #1A1A1A;
-    }
-
-    [data-theme="dark"] header {
-      background: rgba(13, 13, 13, 0.95);
-    }
-
-    [data-theme="dark"] .hero {
-      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-    }
-
-    [data-theme="dark"] footer {
-      background: #0A0A0F;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -98,7 +70,6 @@
       background: var(--bg-white);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* Container */
@@ -123,7 +94,6 @@
       border-bottom: 1px solid var(--border-light);
       z-index: 1000;
       padding: var(--space-md) 0;
-      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .header-content {
@@ -203,27 +173,6 @@
       padding: 18px 40px;
       font-size: var(--font-base);
       border-radius: 12px;
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      background: var(--bg-gray);
-      border: 1px solid var(--border-light);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      transition: all 0.2s;
-      margin-left: var(--space-sm);
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.05);
-      border-color: var(--accent-coral);
     }
 
     /* Hero Section */
@@ -399,11 +348,11 @@
     }
 
     .feature-card {
-      background: var(--bg-white);
+      background: white;
       border: 1px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-lg);
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
     .feature-card:hover {
@@ -481,12 +430,12 @@
     }
 
     .pricing-card {
-      background: var(--bg-white);
+      background: white;
       border: 2px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-xl);
       position: relative;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
     .pricing-card:hover {
@@ -584,11 +533,10 @@
     }
 
     .testimonial-card {
-      background: var(--bg-white);
+      background: white;
       border: 1px solid var(--border-light);
       border-radius: 16px;
       padding: var(--space-lg);
-      transition: all 0.3s ease;
     }
 
     .testimonial-stars {
@@ -796,9 +744,6 @@
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
           <a href="/app" class="btn btn-primary">Get Started</a>
-          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-            <span id="themeIcon">🌙</span>
-          </button>
         </nav>
       </div>
     </div>
@@ -1148,33 +1093,12 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © 2026 Resume Roaster • Built by <a href="https://lumenai.solutions" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600;">Lumen AI Solutions</a> featuring <a href="https://lunalabs.ai" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600;">Luna Labs</a>
+        © 2026 Resume Roaster • Built with ❤️ for job seekers
       </div>
     </div>
   </footer>
 
   <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const html = document.documentElement;
-
-    // Check for saved theme preference or default to light
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-
-    themeToggle.addEventListener('click', () => {
-      const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      updateThemeIcon(theme);
-    });
-
-    function updateThemeIcon(theme) {
-      themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
-    }
-
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
